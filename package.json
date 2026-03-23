@@ -23,7 +23,9 @@
 		"update": "pnpm --recursive update --interactive",
 		"update:latest": "pnpm --recursive update --interactive --latest",
 		"create-package": "turbo gen create-package --args",
-		"release": "bun ./packages/actions/src/releasePackages/index.ts"
+		"release": "bun ./packages/actions/src/releasePackages/index.ts",
+		"selfbot:test": "dotenv -e scripts/.env -- bun scripts/test-selfbot.ts",
+		"selfbot:token": "bun scripts/extract-token.ts"
 	},
 	"type": "module",
 	"contributors": [
@@ -59,6 +61,7 @@
 		"@unocss/eslint-plugin": "^66.6.0",
 		"@vitest/coverage-v8": "^4.0.18",
 		"conventional-changelog-cli": "^5.0.0",
+		"dotenv-cli": "^11.0.0",
 		"eslint": "^9.39.2",
 		"eslint-config-neon": "^0.3.2",
 		"eslint-import-resolver-typescript": "^4.4.4",
