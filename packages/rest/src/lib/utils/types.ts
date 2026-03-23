@@ -33,11 +33,12 @@ export interface RESTOptions {
 	api: string;
 	/**
 	 * The authorization prefix to use for requests, useful if you want to use
-	 * bearer tokens
+	 * bearer tokens. Set to `''` (empty string) to send the token without any
+	 * prefix (required for user account tokens).
 	 *
 	 * @defaultValue `'Bot'`
 	 */
-	authPrefix: 'Bearer' | 'Bot';
+	authPrefix: '' | 'Bearer' | 'Bot';
 	/**
 	 * The cdn path
 	 *
@@ -286,7 +287,7 @@ export interface AuthData {
 	 *
 	 * @defaultValue `REST.options.authPrefix`
 	 */
-	prefix?: 'Bearer' | 'Bot';
+	prefix?: '' | 'Bearer' | 'Bot';
 	/**
 	 * The authorization token to use for this request
 	 */

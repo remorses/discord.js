@@ -314,14 +314,16 @@ export class REST extends AsyncEventEmitter<RestEvents> {
 		// If this request requires authorization (allowing non-"authorized" requests for webhooks)
 		if (request.auth !== false) {
 			if (typeof request.auth === 'object') {
-				headers.Authorization = `${request.auth.prefix ?? this.options.authPrefix} ${request.auth.token}`;
+				const prefix = request.auth.prefix ?? this.options.authPrefix;
+				headers.Authorization = prefix ? `${prefix} ${request.auth.token}` : request.auth.token;
 			} else {
 				// If we haven't received a token, throw an error
 				if (!this.#token) {
 					throw new Error('Expected token to be set for this request, but none was present');
 				}
 
-				headers.Authorization = `${this.options.authPrefix} ${this.#token}`;
+				// When authPrefix is empty (user account tokens), send the token bare
+				headers.Authorization = this.options.authPrefix ? `${this.options.authPrefix} ${this.#token}` : this.#token;
 			}
 		}
 
